@@ -1,5 +1,6 @@
 import { type SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
+import { ResponseHeadersPolicy } from "aws-cdk-lib/aws-cloudfront";
 
 export default {
   config(_input) {
@@ -25,6 +26,9 @@ export default {
           EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST!,
           EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT!,
           EMAIL_FROM: process.env.EMAIL_FROM!,
+        },
+        cdk: {
+          responseHeadersPolicy: ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
         },
       });
 
