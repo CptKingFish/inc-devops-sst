@@ -12,8 +12,8 @@ export default {
     app.stack(function Site({ stack }) {
       const site = new NextjsSite(stack, "site", {
         customDomain: {
-          domainName: "devops.sithu.tech",
-          hostedZone: "sithu.tech",
+          domainName: "sithu.tech",
+          domainAlias: "www.sithu.tech",
         },
         environment: {
           DATABASE_URL: process.env.DATABASE_URL!,
