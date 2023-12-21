@@ -25,6 +25,8 @@ export const organizationsRouter = createTRPCRouter({
           name: input.name,
         },
       });
+      console.log(organization);
+
       return organization;
     }),
   getProjects: protectedProcedure
