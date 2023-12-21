@@ -5,7 +5,7 @@ export default {
   config(_input) {
     return {
       name: "devops-sst",
-      region: "us-east-1",
+      region: "ap-southeast-1",
     };
   },
   stacks(app) {
