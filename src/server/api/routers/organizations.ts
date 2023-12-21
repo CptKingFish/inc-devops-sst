@@ -58,6 +58,9 @@ export const organizationsRouter = createTRPCRouter({
           organizationId: input.orgId,
         },
       });
+
+      console.log(project);
+
       return project;
     }),
   inviteUpperManagement: protectedProcedure
