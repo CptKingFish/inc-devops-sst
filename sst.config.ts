@@ -16,10 +16,17 @@ export default {
         //   domainName: process.env.DOMAIN_NAME!,
         //   domainAlias: `www.${process.env.DOMAIN_NAME!}`,
         // },
+        // customDomain:
+        //   stack.stage === "prod"
+        //     ? process.env.DOMAIN_NAME!
+        //     : `${stack.stage}.${process.env.DOMAIN_NAME!}`,
         customDomain:
           stack.stage === "prod"
-            ? process.env.DOMAIN_NAME!
-            : `${stack.stage}.${process.env.DOMAIN_NAME!}`,
+            ? {
+                domainName: process.env.DOMAIN_NAME!,
+                domainAlias: `www.${process.env.DOMAIN_NAME!}`,
+              }
+            : undefined,
         environment: {
           DATABASE_URL: process.env.DATABASE_URL!,
           NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
