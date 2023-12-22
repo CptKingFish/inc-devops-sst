@@ -12,10 +12,14 @@ export default {
   stacks(app) {
     app.stack(function Site({ stack }) {
       const site = new NextjsSite(stack, "site", {
-        customDomain: {
-          domainName: process.env.DOMAIN_NAME!,
-          domainAlias: `www.${process.env.DOMAIN_NAME!}`,
-        },
+        // customDomain: {
+        //   domainName: process.env.DOMAIN_NAME!,
+        //   domainAlias: `www.${process.env.DOMAIN_NAME!}`,
+        // },
+        customDomain:
+          stack.stage === "prod"
+            ? process.env.DOMAIN_NAME!
+            : `${stack.stage}.${process.env.DOMAIN_NAME!}`,
         environment: {
           DATABASE_URL: process.env.DATABASE_URL!,
           NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
