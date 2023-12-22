@@ -12,6 +12,7 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  productionBrowserSourceMaps: true,
 };
 
 export default config;
