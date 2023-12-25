@@ -21,7 +21,12 @@ export default {
         //     ? process.env.DOMAIN_NAME!
         //     : `${stack.stage}.${process.env.DOMAIN_NAME!}`,
         customDomain:
-          stack.stage === "prod" ? process.env.DOMAIN_NAME : undefined,
+          stack.stage === "prod"
+            ? {
+                domainName: `sst.${process.env.DOMAIN_NAME!}`,
+                hostedZone: `${process.env.DOMAIN_NAME!}`,
+              }
+            : undefined,
         environment: {
           DATABASE_URL: process.env.DATABASE_URL!,
           NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
