@@ -43,10 +43,11 @@ jobs:
         run: npm ci
 
       - name: Install wait-on-log
-        run: npm install --save-dev wait-on-log
+        run: npm install --save-dev wait-on
 
       - name: Start sst dev environment
-        run: npx sst dev --stage test --no-interactive > sst.log & npx wait-on-log -f sst.log -r "npm run dev"
+        # run: npx sst dev --stage test --no-interactive
+        run: npx sst dev --stage test --no-interactive > sst.log & npx wait-on -f sst.log -r "npm run dev"
         # run: npx sst dev --stage test --no-interactive
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
