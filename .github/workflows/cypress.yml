@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+
+concurrency:
+  group: testing_environment
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -55,9 +59,7 @@ jobs:
 
           # Continue with other steps
           echo "Specific text found, continuing with next steps"
-        # run: npx sst dev --stage test --no-interactive
-        # run: npx sst dev --stage test --no-interactive > sst.log & npx wait-on -f sst.log -r "npm run dev"
-        # run: npx sst dev --stage test --no-interactive
+
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
