@@ -45,7 +45,7 @@ jobs:
       - name: Start sst dev environment
         run: |
           # Start the command in the background
-          npx sst dev --stage test > command_output.txt 2>&1 & 
+          npx sst dev --stage test --no-interactive > command_output.txt 2>&1 & 
           COMMAND_PID=$!
 
           # Poll for specific text
