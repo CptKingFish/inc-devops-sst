@@ -42,9 +42,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install wait-on-log
-        run: npm install --save-dev wait-on
-
       - name: Start sst dev environment
         run: |
           # Start the command in the background
@@ -68,8 +65,8 @@ jobs:
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
           start: npm run dev
-          wait-on: "http://localhost:3000" # Waits for above
-          wait-on-timeout: 300
+          wait-on: "http://127.0.0.1:3000" # Waits for above
+          wait-on-timeout: 30
           # Records to Cypress Cloud
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
