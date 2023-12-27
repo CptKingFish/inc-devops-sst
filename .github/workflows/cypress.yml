@@ -25,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Start sst dev environment
-        run: npx sst dev
+        run: npx sst dev --stage test --no-interactive > sst.log & npx wait-on-log -f sst.log -r "npm run dev"
 
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
@@ -58,3 +58,6 @@ jobs:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL_TEST }}
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL_TEST }}
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+
+      - name: Clear up sst dev environment
+        run: npx sst remove --stage test --no-interactive

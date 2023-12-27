@@ -10,6 +10,9 @@ export default {
     };
   },
   stacks(app) {
+    // if (app.stage !== "prod") {
+    app.setDefaultRemovalPolicy("destroy");
+    // }
     app.stack(function Site({ stack }) {
       const site = new NextjsSite(stack, "site", {
         // customDomain: {
