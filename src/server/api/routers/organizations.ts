@@ -20,14 +20,18 @@ export const organizationsRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const organization = await ctx.db.organization.create({
-        data: {
-          name: input.name,
-        },
-      });
-      console.log(organization);
+      try {
+        const organization = await ctx.db.organization.create({
+          data: {
+            name: input.name,
+          },
+        });
+        console.log(organization);
 
-      return organization;
+        return organization;
+      } catch (error) {
+        console.error(error);
+      }
     }),
   getProjects: protectedProcedure
     .input(z.object({ orgId: z.string() }))
@@ -54,16 +58,20 @@ export const organizationsRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const project = await ctx.db.project.create({
-        data: {
-          name: input.name,
-          organizationId: input.orgId,
-        },
-      });
+      try {
+        const project = await ctx.db.project.create({
+          data: {
+            name: input.name,
+            organizationId: input.orgId,
+          },
+        });
 
-      console.log(project);
+        console.log(project);
 
-      return project;
+        return project;
+      } catch (error) {
+        console.error(error);
+      }
     }),
   inviteUpperManagement: protectedProcedure
     .input(
