@@ -4,8 +4,6 @@ import {
   adminProdcedure,
   createTRPCRouter,
   protectedProcedure,
-  publicProcedure,
-  superAdminProdcedure,
 } from "@/server/api/trpc";
 
 export const organizationsRouter = createTRPCRouter({
@@ -92,7 +90,7 @@ export const organizationsRouter = createTRPCRouter({
       const newEmails = input.emails.filter(
         (email) => !existingEmails.includes(email),
       );
-      const newUsers = await ctx.db.user.createMany({
+      await ctx.db.user.createMany({
         data: newEmails.map((email) => ({ email })),
       });
       const users = await ctx.db.user.findMany({
@@ -102,7 +100,7 @@ export const organizationsRouter = createTRPCRouter({
           },
         },
       });
-      const orgUsers = await ctx.db.userOrganization.createMany({
+      await ctx.db.userOrganization.createMany({
         data: users.map((user) => ({
           userId: user.id,
           organizationId: input.orgId,

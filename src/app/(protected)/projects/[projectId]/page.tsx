@@ -6,7 +6,7 @@ import { onlyAllowAccessFor } from "@/app/_components/DataUtils/onlyAllowAccessF
 import { api } from "@/trpc/server";
 import AllStakeholders from "../AllStakeholders";
 import { Button } from "@/app/_components/ui/button";
-import { Project, User } from "@prisma/client";
+import { type Project, type User } from "@prisma/client";
 
 type Props = {
   params: {

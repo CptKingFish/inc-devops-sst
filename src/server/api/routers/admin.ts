@@ -1,12 +1,6 @@
 import { z } from "zod";
 
-import {
-  adminProdcedure,
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-  superAdminProdcedure,
-} from "@/server/api/trpc";
+import { createTRPCRouter, superAdminProdcedure } from "@/server/api/trpc";
 
 export const adminRouter = createTRPCRouter({
   getAllAdminUsers: superAdminProdcedure.query(({ ctx }) => {

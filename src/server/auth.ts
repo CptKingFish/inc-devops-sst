@@ -36,7 +36,8 @@ export const authOptions: NextAuthOptions = {
         ...user,
       },
     }),
-    async signIn({ user, account, email }) {
+    // signIn({ user, account, email })
+    async signIn({ user }) {
       if (!user.email) return false;
       const exists = await db.user.findUnique({
         where: {

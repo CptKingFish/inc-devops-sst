@@ -1,5 +1,5 @@
 import { getServerAuthSession } from "@/server/auth";
-import { db } from "@/server/db";
+// import { db } from "@/server/db";
 import SuperAdminDashboard from "./SuperAdminDashboard";
 import { Suspense } from "react";
 import NormalUserDashboard from "./NormalUserDashboard";
