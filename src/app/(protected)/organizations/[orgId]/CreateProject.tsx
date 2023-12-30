@@ -1,4 +1,9 @@
 "use client";
+
+import React from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import {
   Dialog,
   DialogContent,
@@ -9,10 +14,6 @@ import {
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
-
-import React from "react";
-import { toast } from "sonner";
 
 type Props = {
   orgId: string;
@@ -55,7 +56,7 @@ const CreateProject = ({ orgId }: Props) => {
               setName(e.target.value);
             }}
           />
-          <div className="h-4"></div>
+          <div className="h-4" />
           <div className="flex items-center justify-between">
             <Button isLoading={createProject.isLoading} type="submit">
               Create

@@ -24,6 +24,7 @@ const config = {
     "react/jsx-props-no-spreading": "off", // opinionated rule
     "no-underscore-dangle": "off", // opinionated rule
     "import/prefer-default-export": "warn", // warn when not using default exports
+    "no-void": "off", // allow using void
     "react/function-component-definition": [
       "error",
       {

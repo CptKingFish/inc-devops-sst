@@ -1,6 +1,7 @@
-import type { RouterOutputs } from "@/trpc/shared";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
+import type { RouterOutputs } from "@/trpc/shared";
 
 type Props = {
   organizations: RouterOutputs["organizations"]["getAllOrganizations"];

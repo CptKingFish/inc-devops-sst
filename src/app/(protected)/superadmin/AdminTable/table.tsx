@@ -1,8 +1,10 @@
 "use client";
+
+import React from "react";
+import type { ColumnDef } from "@tanstack/react-table";
+
 import { DataTable } from "@/app/_components/data-table";
 import type { RouterOutputs } from "@/trpc/shared";
-import type { ColumnDef } from "@tanstack/react-table";
-import React from "react";
 
 type Props = {
   users: RouterOutputs["admin"]["getAllAdminUsers"];

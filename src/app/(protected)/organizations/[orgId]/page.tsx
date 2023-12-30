@@ -1,10 +1,12 @@
-import { api } from "@/trpc/server";
 import React from "react";
-import ProjectsList from "./ProjectsList";
 import dynamic from "next/dynamic";
-import { db } from "@/server/db";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
+
+import { api } from "@/trpc/server";
+import ProjectsList from "./ProjectsList";
+import { db } from "@/server/db";
+
 import InviteUpperManagement from "./InviteUpperManagement";
 
 const CreateProject = dynamic(() => import("./CreateProject"), { ssr: false });
@@ -38,15 +40,15 @@ const OrgIdPage = async ({ params: { orgId } }: Props) => {
         </h1>
         <CreateProject orgId={orgId} />
       </div>
-      <div className="h-6"></div>
+      <div className="h-6" />
       <InviteUpperManagement organization={organization} />
-      <div className="h-6"></div>
+      <div className="h-6" />
       {organization.userOrganizations.length > 0 && (
         <>
           <h1 className="font-medium">
             All upper management in this organization:
           </h1>
-          <div className="h-2"></div>
+          <div className="h-2" />
           <ul className="list-inside list-disc">
             {organization.userOrganizations.map((userOrganization) => {
               return (
@@ -56,7 +58,7 @@ const OrgIdPage = async ({ params: { orgId } }: Props) => {
               );
             })}
           </ul>
-          <div className="h-6"></div>
+          <div className="h-6" />
         </>
       )}
       {projects.length === 0 && (

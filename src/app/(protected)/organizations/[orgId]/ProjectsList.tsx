@@ -1,6 +1,7 @@
-import type { RouterOutputs } from "@/trpc/shared";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
+import type { RouterOutputs } from "@/trpc/shared";
 
 type Props = { projects: RouterOutputs["organizations"]["getProjects"] };
 
@@ -74,7 +75,7 @@ const ProjectsList = ({ projects }: Props) => {
             <p className="texet-gray-600 text-sm">
               {project.createdAt.toLocaleDateString()}
             </p>
-            <div className="h-6"></div>
+            <div className="h-6" />
             {project.userProjects.length !== 0 && (
               <>
                 <p className="font-medium">People in this project:</p>

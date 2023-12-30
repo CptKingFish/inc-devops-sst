@@ -5,9 +5,9 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import type { User } from "@prisma/client";
 
 import { db } from "@/server/db";
-import type { User } from "@prisma/client";
 import { sendVerificationRequest } from "./magicLinkEmail";
 
 /**
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
-      sendVerificationRequest: sendVerificationRequest,
+      sendVerificationRequest,
     }),
   ],
 };

@@ -1,12 +1,14 @@
 "use client";
-import { Button } from "@/app/_components/ui/button";
-import { Input } from "@/app/_components/ui/input";
-import { signIn } from "next-auth/react";
+
 import React from "react";
 import { MailCheck } from "lucide-react";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
-export default function Home() {
+import { Button } from "@/app/_components/ui/button";
+import { Input } from "@/app/_components/ui/input";
+
+const Home = () => {
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [signedIn, setSignedIn] = React.useState(false);
@@ -29,12 +31,12 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="h-2"></div>
+      <div className="h-2" />
       <h1 className="text-xl font-medium">Welcome to IMCS</h1>
       <p className="text-sm text-gray-600">
         You can can only login if you have been invited by an admin
       </p>
-      <div className="h-2"></div>
+      <div className="h-2" />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -68,11 +70,13 @@ export default function Home() {
           autoComplete="email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="h-2"></div>
+        <div className="h-2" />
         <Button isLoading={loading} type="submit">
           Sign In
         </Button>
       </form>
     </div>
   );
-}
+};
+
+export default Home;

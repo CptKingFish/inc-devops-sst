@@ -1,13 +1,15 @@
 "use client";
+
+import React from "react";
+import { toast } from "sonner";
+import type { Project } from "@prisma/client";
+import { useRouter } from "next/navigation";
+
 import { DialogHeader } from "@/_components/ui/dialog";
 import Modal from "@/app/_components/Modal";
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
 import { api } from "@/trpc/react";
-import type { Project } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { toast } from "sonner";
 
 type Props = { project: Project };
 
@@ -44,7 +46,7 @@ const InviteToProject = ({ project }: Props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className="h-4"></div>
+          <div className="h-4" />
           <Button isLoading={inviteStakeholder.isLoading} type="submit">
             Invite
           </Button>

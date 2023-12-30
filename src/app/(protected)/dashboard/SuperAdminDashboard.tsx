@@ -1,14 +1,14 @@
-// import { getServerAuthSession } from "@/server/auth";
-import { db } from "@/server/db";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
+import { db } from "@/server/db";
 
 const AllOrganizations = async () => {
   const allOrganization = await db.organization.findMany();
   return (
     <>
       <h1 className="text-xl font-medium">All Organizations</h1>
-      <div className="h-4"></div>
+      <div className="h-4" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
         {allOrganization.length === 0 && (
           <p className="text-gray-500">No organizations...</p>
@@ -39,11 +39,7 @@ const AllOrganizations = async () => {
 };
 
 const SuperAdminDashboard = async () => {
-  return (
-    <>
-      <AllOrganizations />
-    </>
-  );
+  return <AllOrganizations />;
 };
 
 export default SuperAdminDashboard;

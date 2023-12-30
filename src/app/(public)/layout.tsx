@@ -1,14 +1,14 @@
 import "@/styles/globals.css";
 
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
+
 import { GeistSans } from "geist/font/sans";
 import { cookies } from "next/headers";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
-
 import { TRPCReactProvider } from "@/trpc/react";
 import { getServerAuthSession } from "@/server/auth";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 export const metadata = {
   title: "INC UMS",

@@ -1,12 +1,13 @@
 import React from "react";
+import { notFound } from "next/navigation";
+import { type Project, type User } from "@prisma/client";
+
 import InviteToProject from "./InviteToProject";
 import { db } from "@/server/db";
-import { notFound } from "next/navigation";
-import { onlyAllowAccessFor } from "@/app/_components/DataUtils/onlyAllowAccessFor";
+import onlyAllowAccessFor from "@/app/_components/DataUtils/onlyAllowAccessFor";
 import { api } from "@/trpc/server";
 import AllStakeholders from "../AllStakeholders";
 import { Button } from "@/app/_components/ui/button";
-import { type Project, type User } from "@prisma/client";
 
 type Props = {
   params: {
@@ -29,7 +30,7 @@ const InviteToProjectProtector = async ({
       organizationId: project.organizationId,
     },
   });
-  if (!userOrgs) return <></>;
+  if (!userOrgs) return undefined;
   return <InviteToProject project={project} />;
 };
 
@@ -45,13 +46,13 @@ const ProjectIdPage = async ({ params: { projectId } }: Props) => {
   return (
     <>
       <h1 className="text-xl font-medium">{project.name}</h1>
-      <div className="h-2"></div>
+      <div className="h-2" />
       <InviteToProjectProtector project={project} user={user} />
-      <div className="h-4"></div>
+      <div className="h-4" />
       <h1 className="font-medium">All Stakeholders in this project:</h1>
-      <div className="h-2"></div>
+      <div className="h-2" />
       <AllStakeholders stakeholders={stakeholders} />
-      <div className="h-4"></div>
+      <div className="h-4" />
       <Button variant="outline">Create new form!</Button>
     </>
   );

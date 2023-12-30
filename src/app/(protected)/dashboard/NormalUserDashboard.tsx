@@ -1,7 +1,8 @@
+import React from "react";
+import Link from "next/link";
+
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
-import Link from "next/link";
-import React from "react";
 
 const NormalUserDashboard = async () => {
   const { user } = (await getServerAuthSession())!;
@@ -44,7 +45,7 @@ const NormalUserDashboard = async () => {
   return (
     <div>
       <h1 className="text-xl font-medium">My Organizations</h1>
-      <div className="h-2"></div>
+      <div className="h-2" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
         {myProjectsInOrgs.map((userOrg) => {
           return (
@@ -116,9 +117,9 @@ const NormalUserDashboard = async () => {
           );
         })}
       </div>
-      <div className="h-8"></div>
+      <div className="h-8" />
       <h1 className="text-xl font-medium">My Projects</h1>
-      <div className="h-4"></div>
+      <div className="h-4" />
       <div className="flex flex-col gap-4">
         {Object.keys(allProjectsByOrg).map((orgName) => {
           return (
@@ -126,7 +127,7 @@ const NormalUserDashboard = async () => {
               <h1 key={orgName} className="text-lg font-medium text-gray-700">
                 {orgName}
               </h1>
-              <div className="h-4"></div>
+              <div className="h-4" />
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
                 {allProjectsByOrg[orgName]?.map((project) => (
                   <Link

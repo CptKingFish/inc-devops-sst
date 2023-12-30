@@ -30,6 +30,7 @@ export const organizationsRouter = createTRPCRouter({
       } catch (error) {
         console.error(error);
       }
+      return null;
     }),
   getProjects: protectedProcedure
     .input(z.object({ orgId: z.string() }))
@@ -70,6 +71,7 @@ export const organizationsRouter = createTRPCRouter({
       } catch (error) {
         console.error(error);
       }
+      return null;
     }),
   inviteUpperManagement: protectedProcedure
     .input(

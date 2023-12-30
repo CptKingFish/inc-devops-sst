@@ -1,4 +1,9 @@
 "use client";
+
+import React from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 import {
   Dialog,
   DialogContent,
@@ -11,10 +16,6 @@ import { Switch } from "@/_components/ui/switch";
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
-
-import React from "react";
-import { toast } from "sonner";
 
 const AddAdmin = () => {
   const router = useRouter();
@@ -58,7 +59,7 @@ const AddAdmin = () => {
               setEmail(e.target.value);
             }}
           />
-          <div className="h-4"></div>
+          <div className="h-4" />
           <div className="flex items-center justify-between">
             <Button isLoading={inviteAdmin.isLoading} type="submit">
               Invite

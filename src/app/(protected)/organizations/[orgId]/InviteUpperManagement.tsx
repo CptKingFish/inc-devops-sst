@@ -1,14 +1,16 @@
 "use client";
+
+import React from "react";
+import { toast } from "sonner";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
+import type { Organization } from "@prisma/client";
+
 import Modal from "@/app/_components/Modal";
 import ReadExcel from "@/app/_components/ReadExcel";
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
 import { api } from "@/trpc/react";
-import type { Organization } from "@prisma/client";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { toast } from "sonner";
 
 type Props = { organization: Organization };
 
@@ -36,7 +38,7 @@ const InviteUpperManagement = ({ organization }: Props) => {
     <>
       <Modal open={open} setOpen={setOpen}>
         <DialogTitle>
-          Invite Upper Management into "{organization.name}"
+          Invite Upper Management into &quot;{organization.name}&quot;
         </DialogTitle>
         <ReadExcel setEmails={setEmails} />
         <p className="text-center text-sm text-gray-500">or</p>
@@ -56,13 +58,11 @@ const InviteUpperManagement = ({ organization }: Props) => {
           />
         </form>
         {emails.length !== 0 && (
-          <>
-            <ul className="list-inside list-disc">
-              {emails.map((email) => {
-                return <li key={email}>{email}</li>;
-              })}
-            </ul>
-          </>
+          <ul className="list-inside list-disc">
+            {emails.map((emailValue) => {
+              return <li key={emailValue}>{emailValue}</li>;
+            })}
+          </ul>
         )}
         <Button
           isLoading={inviteUpperManagement.isLoading}
@@ -80,7 +80,7 @@ const InviteUpperManagement = ({ organization }: Props) => {
         onClick={() => setOpen(true)}
         isLoading={inviteUpperManagement.isLoading}
       >
-        Invite upper management into "{organization.name}"
+        Invite upper management into &quot;{organization.name}&quot;
       </Button>
     </>
   );

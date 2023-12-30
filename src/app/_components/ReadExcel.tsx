@@ -1,7 +1,9 @@
 "use client";
+
 import * as XLSX from "xlsx";
 import React from "react";
 import { useDropzone } from "react-dropzone";
+
 type Props = {
   setEmails: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -25,7 +27,7 @@ const ReadExcel = ({ setEmails }: Props) => {
   return (
     <div {...getRootProps()} className="rounded-md border border-dashed p-4">
       <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
+      <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
     </div>
   );
 };

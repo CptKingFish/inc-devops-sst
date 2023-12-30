@@ -1,8 +1,10 @@
-import { onlyAllowAccessFor } from "@/app/_components/DataUtils/onlyAllowAccessFor";
-import { api } from "@/trpc/server";
 import React from "react";
-import AllOrganizationsList from "./AllOrganizationsList";
 import dynamic from "next/dynamic";
+
+import { api } from "@/trpc/server";
+import onlyAllowAccessFor from "@/app/_components/DataUtils/onlyAllowAccessFor";
+import AllOrganizationsList from "./AllOrganizationsList";
+
 const CreateOrganization = dynamic(() => import("./CreateOrganization"), {
   ssr: false,
 });
@@ -16,7 +18,7 @@ const OrganizationsPage = async () => {
         <h1 className="text-xl font-medium">Organizations</h1>
         <CreateOrganization />
       </div>
-      <div className="h-6"></div>
+      <div className="h-6" />
       {allOrganizations.length === 0 && (
         <div className="text-gray-400">No organizations yet.</div>
       )}

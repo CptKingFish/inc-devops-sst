@@ -1,5 +1,6 @@
-import { api } from "@/trpc/server";
 import React from "react";
+
+import { api } from "@/trpc/server";
 import Table from "./table";
 
 const AdminTable = async () => {

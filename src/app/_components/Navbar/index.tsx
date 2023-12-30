@@ -1,8 +1,9 @@
-import { getServerAuthSession } from "@/server/auth";
-import { redirect } from "next/navigation";
 import React from "react";
-import SignOutButton from "./SignOutButton";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { getServerAuthSession } from "@/server/auth";
+import SignOutButton from "./SignOutButton";
 
 const Navbar = async () => {
   const session = await getServerAuthSession();

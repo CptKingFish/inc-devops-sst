@@ -1,15 +1,16 @@
 import "@/styles/globals.css";
 
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
+
 import { GeistSans } from "geist/font/sans";
 import { cookies } from "next/headers";
 import NextTopLoader from "nextjs-toploader";
-
 import { TRPCReactProvider } from "@/trpc/react";
 import { getServerAuthSession } from "@/server/auth";
-import { redirect } from "next/navigation";
+
 import Navbar from "../_components/Navbar";
-import { Toaster } from "sonner";
-import { Suspense } from "react";
 
 export const metadata = {
   title: "INC UMS",

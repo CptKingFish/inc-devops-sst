@@ -9,7 +9,7 @@
     "db:studio": "prisma studio",
     "dev": "sst bind next dev",
     "postinstall": "prisma generate",
-    "lint": "next lint",
+    "lint": "next lint --quiet",
     "lint:fix": "next lint --fix",
     "start": "next start",
     "test": "cypress run"

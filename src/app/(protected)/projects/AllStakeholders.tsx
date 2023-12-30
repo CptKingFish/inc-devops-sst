@@ -1,5 +1,6 @@
-import type { RouterOutputs } from "@/trpc/shared";
 import React from "react";
+
+import type { RouterOutputs } from "@/trpc/shared";
 
 type Props = {
   stakeholders: RouterOutputs["project"]["getStakeholders"];

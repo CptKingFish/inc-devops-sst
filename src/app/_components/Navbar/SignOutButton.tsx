@@ -1,7 +1,9 @@
 "use client";
-import { Button } from "@/app/_components/ui/button";
-import { signOut } from "next-auth/react";
+
 import React from "react";
+import { signOut } from "next-auth/react";
+
+import { Button } from "@/app/_components/ui/button";
 
 const SignOutButton = () => {
   return (
