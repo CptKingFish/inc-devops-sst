@@ -3,7 +3,7 @@
 import React from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { DataTable } from "@/app/_components/data-table";
+import DataTable from "@/app/_components/data-table";
 import type { RouterOutputs } from "@/trpc/shared";
 
 type Props = {

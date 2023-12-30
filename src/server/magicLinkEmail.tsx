@@ -1,6 +1,7 @@
 import type { Theme } from "next-auth";
 import type { SendVerificationRequestParams } from "next-auth/providers/email";
 import { createTransport } from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
 function text({ url, host }: { url: string; host: string }) {
@@ -55,14 +56,14 @@ function html(params: { url: string; host: string; theme: Theme }) {
 `;
 }
 
-export async function sendVerificationRequest(
+export default async function sendVerificationRequest(
   params: SendVerificationRequestParams,
 ) {
   const { identifier, url, provider, theme } = params;
   const { host } = new URL(url);
   console.log({ url });
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
-  const transport = createTransport(provider.server);
+  const transport = createTransport(provider.server as SMTPTransport.Options);
   const result = await transport.sendMail({
     to: identifier,
     from: provider.from,

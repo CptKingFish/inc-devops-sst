@@ -15,13 +15,17 @@ const ReadExcel = ({ setEmails }: Props) => {
       if (!file) return;
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-        header: 1,
-        defval: "",
-      });
+      const worksheet = workbook.SheetNames[0]
+        ? workbook.Sheets[workbook.SheetNames[0]]
+        : null;
+      if (worksheet) {
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+          header: 1,
+          defval: "",
+        });
 
-      setEmails(jsonData.flat() as string[]);
+        setEmails(jsonData.flat() as string[]);
+      }
     },
   });
   return (

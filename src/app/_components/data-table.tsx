@@ -15,11 +15,11 @@ interface DataTableProps<TData, TValue> {
   pagination?: boolean;
 }
 
-export function DataTable<TData, TValue>({
+const DataTable = <TData, TValue>({
   columns,
   data,
   pagination = false,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, TValue>) => {
   const table = useReactTable({
     data,
     columns,
@@ -114,4 +114,6 @@ export function DataTable<TData, TValue>({
       </div>
     </div>
   );
-}
+};
+
+export default DataTable;

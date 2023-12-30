@@ -14,6 +14,7 @@ export const TRPCReactProvider = (props: {
   children: React.ReactNode;
   cookies: string;
 }) => {
+  const { children, cookies } = props;
   const [queryClient] = useState(() => new QueryClient());
 
   const [trpcClient] = useState(() =>
@@ -29,7 +30,7 @@ export const TRPCReactProvider = (props: {
           url: getUrl(),
           headers() {
             return {
-              cookie: props.cookies,
+              cookie: cookies,
               "x-trpc-source": "react",
             };
           },
@@ -41,7 +42,7 @@ export const TRPCReactProvider = (props: {
   return (
     <QueryClientProvider client={queryClient}>
       <api.Provider client={trpcClient} queryClient={queryClient}>
-        {props.children}
+        {children}
       </api.Provider>
     </QueryClientProvider>
   );
