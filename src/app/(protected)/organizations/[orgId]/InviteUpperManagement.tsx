@@ -8,8 +8,8 @@ import type { Organization } from "@prisma/client";
 
 import Modal from "@/app/_components/Modal";
 import ReadExcel from "@/app/_components/ReadExcel";
-import { Button } from "@/app/_components/ui/button";
-import { Input } from "@/app/_components/ui/input";
+import { Button } from "@/_components/ui/button";
+import { Input } from "@/_components/ui/input";
 import { api } from "@/trpc/react";
 
 type Props = { organization: Organization };

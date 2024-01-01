@@ -5,8 +5,8 @@ import { MailCheck } from "lucide-react";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 
-import { Button } from "@/app/_components/ui/button";
-import { Input } from "@/app/_components/ui/input";
+import { Button } from "@/_components/ui/button";
+import { Input } from "@/_components/ui/input";
 
 const Home = () => {
   const [email, setEmail] = React.useState("");

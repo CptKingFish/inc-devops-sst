@@ -13,8 +13,8 @@ import {
   DialogTrigger,
 } from "@/_components/ui/dialog";
 import { Switch } from "@/_components/ui/switch";
-import { Button } from "@/app/_components/ui/button";
-import { Input } from "@/app/_components/ui/input";
+import { Button } from "@/_components/ui/button";
+import { Input } from "@/_components/ui/input";
 import { api } from "@/trpc/react";
 
 const AddAdmin = () => {

@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-table";
 
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../../_components/ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
