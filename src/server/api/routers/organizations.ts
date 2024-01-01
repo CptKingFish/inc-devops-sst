@@ -6,6 +6,7 @@ import {
   protectedProcedure,
 } from "@/server/api/trpc";
 
+// eslint-disable-next-line import/prefer-default-export
 export const organizationsRouter = createTRPCRouter({
   getAllOrganizations: adminProdcedure.query(async ({ ctx }) => {
     const organizations = await ctx.db.organization.findMany({});
