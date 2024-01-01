@@ -7,7 +7,7 @@ import { db } from "@/server/db";
 import onlyAllowAccessFor from "@/app/_components/DataUtils/onlyAllowAccessFor";
 import { api } from "@/trpc/server";
 import AllStakeholders from "../AllStakeholders";
-import { Button } from "@/app/_components/ui/button";
+import { Button } from "@/_components/ui/button";
 
 type Props = {
   params: {
