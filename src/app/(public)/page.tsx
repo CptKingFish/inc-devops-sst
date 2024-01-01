@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       {signedIn && (
-        <div className="rounded-md bg-green-50 p-4">
+        <div data-testid="notify-email-sent" className="rounded-md bg-green-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
               <MailCheck
@@ -63,6 +63,7 @@ const Home = () => {
         }}
       >
         <Input
+          data-testid="login-email-input"
           placeholder="Enter your email here..."
           type="email"
           required
@@ -71,7 +72,7 @@ const Home = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <div className="h-2" />
-        <Button isLoading={loading} type="submit">
+        <Button data-testid="sign-in-button" isLoading={loading} type="submit">
           Sign In
         </Button>
       </form>
