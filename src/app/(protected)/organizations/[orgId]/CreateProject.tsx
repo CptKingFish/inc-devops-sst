@@ -37,7 +37,7 @@ const CreateProject = ({ orgId }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button>Create Project</Button>
+        <Button data-testid="create-new-project">Create Project</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -50,6 +50,7 @@ const CreateProject = ({ orgId }: Props) => {
           }}
         >
           <Input
+            data-testid="new-project-name-input"
             placeholder="Name"
             value={name}
             onChange={(e) => {
@@ -58,7 +59,7 @@ const CreateProject = ({ orgId }: Props) => {
           />
           <div className="h-4" />
           <div className="flex items-center justify-between">
-            <Button isLoading={createProject.isLoading} type="submit">
+            <Button data-testid="submit-btn" isLoading={createProject.isLoading} type="submit">
               Create
             </Button>
           </div>

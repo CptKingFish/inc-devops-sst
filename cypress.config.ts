@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from "cypress";
 import ms from "smtp-tester";
 
@@ -18,22 +19,25 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
       // starts the SMTP server at localhost:7777
-      config.env.EMAIL_SERVER_PORT = 7777;
-      config.env.EMAIL_SERVER_HOST = "localhost";
+      // config.env.EMAIL_SERVER_PORT = 7777;
+      // config.env.EMAIL_SERVER_HOST = "localhost";
 
       const port = 7777;
       const mailServer = ms.init(port);
       // [receiver email]: email text
-      let lastEmail = {};
+      let lastEmail: Record<string, string> = {};
 
       // process all emails
       mailServer.bind((addr, id, email) => {
         // store the email by the receiver email
-        lastEmail[email.headers.to] = email.html || email.body;
+        if (!email.receivers) return;
+        const emailto = Object.keys(email.receivers)[0];
+
+        lastEmail[emailto] = email.html || email.body;
       });
 
       on("task", {
-        resetEmails(email) {
+        resetEmails(email: string) {
           if (email) {
             delete lastEmail[email];
           } else {
@@ -42,14 +46,15 @@ export default defineConfig({
           return null;
         },
 
-        getLastEmail(email) {
+        getLastEmail(email: string) {
           // cy.task cannot return undefined
           // thus we return null as a fallback
-          return lastEmail[email] || null;
+          return lastEmail[email] ?? null;
         },
       });
 
       return config;
     },
+    baseUrl: "http://localhost:3000",
   },
 });

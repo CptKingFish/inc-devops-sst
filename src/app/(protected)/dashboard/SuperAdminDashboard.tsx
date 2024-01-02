@@ -7,11 +7,11 @@ const AllOrganizations = async () => {
   const allOrganization = await db.organization.findMany();
   return (
     <>
-      <h1 className="text-xl font-medium">All Organizations</h1>
+      <h1 data-testid="organization-label" className="text-xl font-medium">All Organizations</h1>
       <div className="h-4" />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
+      <div data-testid="all-organizations" className="grid grid-cols-1 gap-4 sm:grid-cols-5">
         {allOrganization.length === 0 && (
-          <p className="text-gray-500">No organizations...</p>
+          <p data-testid="no-organization" className="text-gray-500">No organizations...</p>
         )}
         {allOrganization.map((organization) => {
           return (
