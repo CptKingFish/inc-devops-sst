@@ -35,3 +35,53 @@
 //     }
 //   }
 // }
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to check organization.
+       * @example cy.checkOrganization()
+       */
+      login(emailInput: string): Chainable<void>;
+      checkOrganization(): Chainable<Element>;
+    }
+  }
+}
+
+Cypress.Commands.add("login", (emailInput: string) => {
+  cy.visit("/");
+  cy.get('[data-testid="login-email-input"]').type(emailInput);
+  cy.get('[data-testid="sign-in-button"]').click();
+  cy.get('[data-testid="notify-email-sent"]').should("exist");
+  cy.task("getLastEmail", emailInput).then((email) => {
+    if (typeof email === "string") {
+      const hrefRegex = /href="([^"]+)"/; // This regex will match href="any_non_quote_characters"
+      const match = email.match(hrefRegex);
+      if (match?.[1]) {
+        const magicLink = match[1];
+        cy.visit(magicLink);
+      } else {
+        throw new Error("Magic link not found in email");
+      }
+    } else {
+      throw new Error("Email is not a string");
+    }
+  });
+});
+
+Cypress.Commands.add("checkOrganization", () => {
+  cy.visit("/dashboard");
+  cy.get('[data-testid="organization-label"]').should("exist");
+
+  cy.get("body").then(($body) => {
+    if ($body.find('[data-testid="no-organization"]').length > 0) {
+      cy.get('[data-testid="no-organization"]').should("exist");
+    } else {
+      cy.get('[data-testid="all-organizations"]').each((item) => {
+        cy.wrap(item).should("exist").click();
+      });
+    }
+  });
+});
