@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: testing_environment
 
 jobs:
-  deploy:
+  lint-and-test:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -36,6 +38,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Start sst dev environment
+        run: |
+          # Start the command in the background
+          pnpm exec sst dev --stage test > command_output.txt 2>&1 & 
+          COMMAND_PID=$!
+
+          # Poll for specific text
+          while ! grep -q "npm run dev" command_output.txt; do
+            sleep 1
+          done
+
+          # Continue with other steps
+          echo "Specific text found, continuing with next steps"
+
       - name: Run linter
         run: pnpm lint
 
@@ -51,3 +67,6 @@ jobs:
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
           parallel: true
+
+      - name: Clear up sst dev environment
+        run: pnpm exec sst remove --stage test --no-interactive
