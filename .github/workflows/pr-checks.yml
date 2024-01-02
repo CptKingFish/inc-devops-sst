@@ -61,8 +61,9 @@ jobs:
         with:
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-          start: pnpm dev
+          start: pnpm exec sst bind next dev --stage test
           wait-on: "http://localhost:3000" # Waits for above
+          wait-on-timeout: 30
           # Records to Cypress Cloud
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
