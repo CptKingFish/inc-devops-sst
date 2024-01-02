@@ -14,6 +14,7 @@ jobs:
     uses: ./.github/workflows/integration.yml
     secrets: inherit
   deploy:
+    needs: lint-and-test
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +25,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
@@ -42,6 +46,7 @@ jobs:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         run: |
           pnpm exec prisma generate
           pnpm exec sst deploy --stage prod
