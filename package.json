@@ -43,6 +43,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "server-only": "^0.0.1",
+    "smtp-tester": "^2.1.0",
     "sonner": "^1.2.4",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.1.0",
