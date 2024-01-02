@@ -11,7 +11,7 @@ concurrency:
 jobs:
   lint-and-test:
     # use reusable runner from integration.yml
-    uses: ./.github/actions/integration.yml@main
+    uses: ./.github/workflows/integration.yml@main
     secrets: inherit
   deploy:
     runs-on: ubuntu-latest
