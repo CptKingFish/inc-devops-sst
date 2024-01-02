@@ -1,0 +1,73 @@
+name: Lint and Test
+
+on:
+  pull_request:
+    branches:
+      - main
+concurrency:
+  group: testing_environment
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      EMAIL_SERVER_HOST: ${{ secrets.EMAIL_SERVER_HOST }}
+      EMAIL_SERVER_PASSWORD: ${{ secrets.EMAIL_SERVER_PASSWORD }}
+      EMAIL_SERVER_PORT: ${{ secrets.EMAIL_SERVER_PORT }}
+      EMAIL_SERVER_USER: ${{ secrets.EMAIL_SERVER_USER }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+      DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Start sst dev environment
+        run: |
+          # Start the command in the background
+          pnpm exec sst dev --stage test > command_output.txt 2>&1 & 
+          COMMAND_PID=$!
+
+          # Poll for specific text
+          while ! grep -q "npm run dev" command_output.txt; do
+            sleep 1
+          done
+
+          # Continue with other steps
+          echo "Specific text found, continuing with next steps"
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run tests
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v6
+        with:
+          # Starts web server for E2E tests - replace with your own server invocation
+          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+          start: pnpm exec sst bind next dev --stage test
+          wait-on: "http://localhost:3000" # Waits for above
+          wait-on-timeout: 30
+          # Records to Cypress Cloud
+          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+          record: true
+          parallel: true
+
+      - name: Clear up sst dev environment
+        run: pnpm exec sst remove --stage test --no-interactive
