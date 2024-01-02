@@ -1,13 +1,20 @@
-name: Deploy
+name: Deployment
 
 on:
-  workflow_dispatch
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: prod_environment
 
 jobs:
+  lint-and-test:
+    # use reusable runner from integration.yml
+    uses: ./.github/workflows/integration.yml
+    secrets: inherit
   deploy:
+    needs: lint-and-test
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +26,11 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Deploy
         env:
@@ -36,6 +46,7 @@ jobs:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         run: |
-          npx prisma generate
-          npx sst deploy --stage prod
+          pnpm exec prisma generate
+          pnpm exec sst deploy --stage prod
