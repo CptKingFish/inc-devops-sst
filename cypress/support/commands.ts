@@ -55,8 +55,9 @@ Cypress.Commands.add("login", (emailInput: string) => {
   cy.get('[data-testid="login-email-input"]').type(emailInput);
   cy.get('[data-testid="sign-in-button"]').click();
   cy.get('[data-testid="notify-email-sent"]').should("exist");
+  
   cy.task("getLastEmail", emailInput).then((email) => {
-    cy.log(email as string);
+    cy.log("email",email as string);
     if (typeof email === "string") {
       const hrefRegex = /href="([^"]+)"/; // This regex will match href="any_non_quote_characters"
       const match = email.match(hrefRegex);
