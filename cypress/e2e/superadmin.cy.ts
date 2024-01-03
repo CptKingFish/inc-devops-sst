@@ -23,15 +23,6 @@
 //   });
 // });
 describe("create new project", () => {
-  it("can login", () => {
-    cy.login("lwin.moehtet77@gmail.com");
-  });
-
-  it("can see all organization", () => {
-    cy.login("lwin.moehtet77@gmail.com");
-    cy.checkOrganization();
-  });
-
   it("can create new project", () => {
     cy.login("lwin.moehtet77@gmail.com");
     cy.checkOrganization();
