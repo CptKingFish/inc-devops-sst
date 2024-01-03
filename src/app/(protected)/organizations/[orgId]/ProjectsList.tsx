@@ -9,7 +9,7 @@ const ProjectsList = ({ projects }: Props) => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
       {projects.map((project) => (
-        <Link
+        <Link data-testid={`project-${project.id}`}
           href={`/projects/${project.id}`}
           key={project.id}
           className="cursor-pointer overflow-hidden rounded-md border bg-white shadow transition hover:scale-105 hover:shadow-xl"
