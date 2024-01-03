@@ -51,7 +51,7 @@ const InviteUpperManagement = ({ organization }: Props) => {
             });
           }}
         >
-          <Input
+          <Input data-testid="hms-email-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email of upper management to invite..."
@@ -64,7 +64,7 @@ const InviteUpperManagement = ({ organization }: Props) => {
             })}
           </ul>
         )}
-        <Button
+        <Button data-testid="submit-btn"
           isLoading={inviteUpperManagement.isLoading}
           onClick={() => {
             inviteUpperManagement.mutate({
@@ -76,7 +76,7 @@ const InviteUpperManagement = ({ organization }: Props) => {
           Invite
         </Button>
       </Modal>
-      <Button
+      <Button data-testid="invite-hms-btn"
         onClick={() => setOpen(true)}
         isLoading={inviteUpperManagement.isLoading}
       >
