@@ -10,7 +10,6 @@ concurrency:
 
 jobs:
   lint-and-test:
-    # use reusable runner from integration.yml
     uses: ./.github/workflows/integration.yml
     secrets: inherit
   deploy:
