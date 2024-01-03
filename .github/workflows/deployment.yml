@@ -21,6 +21,8 @@ env:
   NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
   DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   lint-and-test:
     uses: ./.github/workflows/integration.yml

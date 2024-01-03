@@ -14,6 +14,9 @@ jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     env:
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -26,7 +29,6 @@ jobs:
       NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
       NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
       DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
-      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
