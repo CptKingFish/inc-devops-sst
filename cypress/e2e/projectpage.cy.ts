@@ -22,12 +22,22 @@
 //     });
 //   });
 // });
-describe("create new project", () => {
-  it("can create new project", () => {
+describe("project page", () => {
+  beforeEach(() => {
     cy.login("lwin.moehtet77@gmail.com");
+  });
+  it("can create new project", () => {
     cy.checkOrganization();
-    cy.get('[data-testid="create-new-project"]').click();
-    cy.get('[data-testid="new-project-name-input"]').type("test");
-    cy.get('[data-testid="submit-btn"]').click();
+    cy.getDataTestId("create-new-project").click();
+    cy.getDataTestId("new-project-name-input").type("test");
+    cy.getDataTestId("submit-btn").click();
+  });
+  it("can invite HMS", () => {
+    cy.checkOrganization();
+    cy.getDataTestId("invite-hms-btn").click();
+    cy.getDataTestId("hms-email-input").type("test@gmail.com");
+    cy.getDataTestId("submit-btn").click();
+
+    cy.getDataTestId("hms-emails").should("exist");
   });
 });

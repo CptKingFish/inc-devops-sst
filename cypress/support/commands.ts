@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -44,20 +45,26 @@ declare global {
        * Custom command to check organization.
        * @example cy.checkOrganization()
        */
+      getDataTestId(dataTestId: string): Chainable<JQuery<HTMLElement>>;
       login(emailInput: string): Chainable<void>;
       checkOrganization(): Chainable<Element>;
     }
   }
 }
 
+// This commands is used to get data-testid without having to use cy.get(`[data-testid="${dataTestId}"]`)
+Cypress.Commands.add("getDataTestId", (dataTestId: string) => {
+  return cy.get(`[data-testid="${dataTestId}"]`);
+});
+
 Cypress.Commands.add("login", (emailInput: string) => {
   cy.visit("/");
-  cy.get('[data-testid="login-email-input"]').type(emailInput);
-  cy.get('[data-testid="sign-in-button"]').click();
-  cy.get('[data-testid="notify-email-sent"]').should("exist");
-  
+  cy.getDataTestId("login-email-input").type(emailInput);
+  cy.getDataTestId("sign-in-button").click();
+  cy.getDataTestId("notify-email-sent").should("exist");
+
   cy.task("getLastEmail", emailInput).then((email) => {
-    cy.log("email",email as string);
+    cy.log("email", email as string);
     if (typeof email === "string") {
       const hrefRegex = /href="([^"]+)"/; // This regex will match href="any_non_quote_characters"
       const match = email.match(hrefRegex);
@@ -75,13 +82,13 @@ Cypress.Commands.add("login", (emailInput: string) => {
 
 Cypress.Commands.add("checkOrganization", () => {
   cy.visit("/dashboard");
-  cy.get('[data-testid="organization-label"]').should("exist");
+  cy.getDataTestId("organization-label").should("exist");
 
   cy.get("body").then(($body) => {
     if ($body.find('[data-testid="no-organization"]').length > 0) {
-      cy.get('[data-testid="no-organization"]').should("exist");
+      cy.getDataTestId("no-organization").should("exist");
     } else {
-      cy.get('[data-testid="all-organizations"]').each((item) => {
+      cy.getDataTestId("all-organizations").each((item) => {
         cy.wrap(item).should("exist").click();
       });
     }

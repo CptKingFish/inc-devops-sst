@@ -49,7 +49,7 @@ const OrgIdPage = async ({ params: { orgId } }: Props) => {
             All upper management in this organization:
           </h1>
           <div className="h-2" />
-          <ul className="list-inside list-disc">
+          <ul data-testid="hms-emails" className="list-inside list-disc">
             {organization.userOrganizations.map((userOrganization) => {
               return (
                 <li key={userOrganization.userId}>
