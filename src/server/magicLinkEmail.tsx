@@ -1,7 +1,7 @@
 import type { Theme } from "next-auth";
 import type { SendVerificationRequestParams } from "next-auth/providers/email";
 import { createTransport } from "nodemailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
 function text({ url, host }: { url: string; host: string }) {
