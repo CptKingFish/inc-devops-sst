@@ -37,7 +37,7 @@ const AddAdmin = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button>Invite Admin</Button>
+        <Button data-testid="invite-admin-btn">Invite Admin</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -52,7 +52,7 @@ const AddAdmin = () => {
             inviteAdmin.mutate({ email, systemRole: role });
           }}
         >
-          <Input
+          <Input data-testid="invite-admin-email-input"
             placeholder="Email"
             value={email}
             onChange={(e) => {
@@ -61,7 +61,7 @@ const AddAdmin = () => {
           />
           <div className="h-4" />
           <div className="flex items-center justify-between">
-            <Button isLoading={inviteAdmin.isLoading} type="submit">
+            <Button data-testid="submit-btn" isLoading={inviteAdmin.isLoading} type="submit">
               Invite
             </Button>
             <div className="flex items-center gap-2 text-xs">

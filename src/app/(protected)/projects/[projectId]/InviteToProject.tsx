@@ -41,18 +41,18 @@ const InviteToProject = ({ project }: Props) => {
             });
           }}
         >
-          <Input
+          <Input data-testid="invite-stakeholder-email-input"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="h-4" />
-          <Button isLoading={inviteStakeholder.isLoading} type="submit">
+          <Button data-testid="submit-btn" isLoading={inviteStakeholder.isLoading} type="submit">
             Invite
           </Button>
         </form>
       </Modal>
-      <Button onClick={() => setOpen(true)}>
+      <Button data-testid="invite-stakeholder-btn" onClick={() => setOpen(true)}>
         Invite stakeholder to Project
       </Button>
     </>

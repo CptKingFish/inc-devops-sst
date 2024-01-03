@@ -82,13 +82,13 @@ Cypress.Commands.add("login", (emailInput: string) => {
 
 Cypress.Commands.add("checkOrganization", () => {
   cy.visit("/dashboard");
-  cy.getDataTestId("organization-label").should("exist");
+  cy.getDataTestId("all-organization-label").should("exist");
 
   cy.get("body").then(($body) => {
     if ($body.find('[data-testid="no-organization"]').length > 0) {
       cy.getDataTestId("no-organization").should("exist");
     } else {
-      cy.getDataTestId("all-organizations").each((item) => {
+      cy.get('[data-testid^="organization-"]').each((item) => {
         cy.wrap(item).should("exist").click();
       });
     }
