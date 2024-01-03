@@ -6,6 +6,7 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const db =
   globalForPrisma.prisma ??
   new PrismaClient({

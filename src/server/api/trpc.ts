@@ -40,7 +40,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * 2. INITIALIZATION
  *
  * This is where the tRPC API is initialized, connecting the context and transformer. We also parse
- * ZodErrors so that you get typesafety on the frontend if your procedure fails due to validation
+ * ZodErrors so that you get type safety on the frontend if your procedure fails due to validation
  * errors on the backend.
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
@@ -92,7 +92,7 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
     },
   });
 });
-const enforeUserIsSuperAdmin = t.middleware(({ ctx, next }) => {
+const enforceUserIsSuperAdmin = t.middleware(({ ctx, next }) => {
   if (ctx.session?.user.systemRole !== "superadmin") {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -104,7 +104,7 @@ const enforeUserIsSuperAdmin = t.middleware(({ ctx, next }) => {
   });
 });
 
-const enforeUserIsAdmin = t.middleware(({ ctx, next }) => {
+const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
   if (
     ctx.session?.user.systemRole !== "admin" &&
     ctx.session?.user.systemRole !== "superadmin"
@@ -128,5 +128,5 @@ const enforeUserIsAdmin = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
-export const adminProdcedure = t.procedure.use(enforeUserIsAdmin);
-export const superAdminProdcedure = t.procedure.use(enforeUserIsSuperAdmin);
+export const adminProcedure = t.procedure.use(enforceUserIsAdmin);
+export const superAdminProcedure = t.procedure.use(enforceUserIsSuperAdmin);

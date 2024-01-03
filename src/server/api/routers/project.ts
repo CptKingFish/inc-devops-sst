@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
+// eslint-disable-next-line import/prefer-default-export
 export const projectRouter = createTRPCRouter({
   inviteStakeholder: protectedProcedure
     .input(

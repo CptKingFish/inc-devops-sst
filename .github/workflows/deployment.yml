@@ -1,9 +1,10 @@
 name: Deployment
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+on: workflow_dispatch
 
 concurrency:
   group: prod_environment

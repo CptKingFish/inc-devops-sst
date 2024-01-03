@@ -1,18 +1,18 @@
 import { z } from "zod";
 
 import {
-  adminProdcedure,
+  adminProcedure,
   createTRPCRouter,
   protectedProcedure,
 } from "@/server/api/trpc";
 
 // eslint-disable-next-line import/prefer-default-export
 export const organizationsRouter = createTRPCRouter({
-  getAllOrganizations: adminProdcedure.query(async ({ ctx }) => {
+  getAllOrganizations: adminProcedure.query(async ({ ctx }) => {
     const organizations = await ctx.db.organization.findMany({});
     return organizations;
   }),
-  createOrganization: adminProdcedure
+  createOrganization: adminProcedure
     .input(
       z.object({
         name: z.string(),

@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-import { createTRPCRouter, superAdminProdcedure } from "@/server/api/trpc";
+import { createTRPCRouter, superAdminProcedure } from "@/server/api/trpc";
 
 // eslint-disable-next-line import/prefer-default-export
 export const adminRouter = createTRPCRouter({
-  getAllAdminUsers: superAdminProdcedure.query(({ ctx }) => {
+  getAllAdminUsers: superAdminProcedure.query(({ ctx }) => {
     return ctx.db.user.findMany({
       where: {
         systemRole: {
@@ -13,7 +13,7 @@ export const adminRouter = createTRPCRouter({
       },
     });
   }),
-  inviteAdmin: superAdminProdcedure
+  inviteAdmin: superAdminProcedure
     .input(
       z.object({
         email: z.string().email(),
