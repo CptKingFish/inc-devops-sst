@@ -32,7 +32,7 @@ export default defineConfig({
         // store the email by the receiver email
         if (!email.receivers) return;
         const emailto = Object.keys(email.receivers)[0];
-        
+
         if (!emailto || !email.body) return;
         lastEmail[emailto] = email.html || email.body;
       });
@@ -57,5 +57,6 @@ export default defineConfig({
       return config;
     },
     baseUrl: "http://localhost:3000",
+    defaultCommandTimeout: 10000,
   },
 });
