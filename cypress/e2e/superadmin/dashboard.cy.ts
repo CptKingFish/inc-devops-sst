@@ -10,25 +10,17 @@ describe("dashboard page", () => {
   it("super admin can create new project", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
-    cy.clickOrganizationLink().then(() => {
-      cy.url()
-        .should("include", "/organizations/")
-        .then(() => {
-          cy.createNewProject();
-        });
-    });
+    cy.clickOrganizationLink();
+    cy.url().should("include", "/organizations/");
+    cy.createNewProject();
   });
 
   it("super admin can invite HMS", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
-    cy.clickOrganizationLink().then(() => {
-      cy.url()
-        .should("include", "/organizations/")
-        .then(() => {
-          cy.inviteHMS();
-        });
-    });
+    cy.clickOrganizationLink();
+    cy.url().should("include", "/organizations/");
+    cy.inviteHMS();
   });
 });
 
