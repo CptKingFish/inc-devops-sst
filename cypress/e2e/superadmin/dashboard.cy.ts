@@ -1,18 +1,21 @@
 describe("dashboard page", () => {
   beforeEach(() => {
-    cy.login("lwin.moehtet77@gmail.com");
+    cy.url().clearAllSessionStorage();
   });
 
-  afterEach(() => {
-    cy.url().clearAllSessionStorage();
+  it("can login", () => {
+    cy.login("lwin.moehtet77@gmail.com");
   });
 
   it("super admin can create new project", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
     cy.clickOrganizationLink().then(() => {
-      cy.url().should("include", "/organizations/");
-      cy.createNewProject();
+      cy.url()
+        .should("include", "/organizations/")
+        .then(() => {
+          cy.createNewProject();
+        });
     });
   });
 
@@ -20,8 +23,11 @@ describe("dashboard page", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
     cy.clickOrganizationLink().then(() => {
-      cy.url().should("include", "/organizations/");
-      cy.inviteHMS();
+      cy.url()
+        .should("include", "/organizations/")
+        .then(() => {
+          cy.inviteHMS();
+        });
     });
   });
 });
