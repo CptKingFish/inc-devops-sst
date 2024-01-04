@@ -11,7 +11,11 @@ describe("dashboard page", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
     cy.clickOrganizationLink().then(() => {
-      cy.createNewProject();
+      cy.url()
+        .should("include", "/organizations/")
+        .then(() => {
+          cy.createNewProject();
+        });
     });
   });
 
@@ -19,7 +23,11 @@ describe("dashboard page", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
     cy.clickOrganizationLink().then(() => {
-      cy.inviteHMS();
+      cy.url()
+        .should("include", "/organizations/")
+        .then(() => {
+          cy.inviteHMS();
+        });
     });
   });
 });
