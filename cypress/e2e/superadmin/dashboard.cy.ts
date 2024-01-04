@@ -3,20 +3,26 @@ describe("dashboard page", () => {
     cy.login("lwin.moehtet77@gmail.com");
   });
 
+  afterEach(() => {
+    cy.url().clearAllSessionStorage();
+  });
+
   it("super admin can create new project", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
-    cy.clickOrganizationLink();
-    cy.createNewProject();
-    cy.url().clearAllSessionStorage();
+    cy.clickOrganizationLink().then(() => {
+      cy.url().should("include", "/organizations/");
+      cy.createNewProject();
+    });
   });
 
   it("super admin can invite HMS", () => {
     cy.url().should("include", "/dashboard");
     cy.get("h1").contains("All Organizations");
-    cy.clickOrganizationLink();
-    cy.inviteHMS();
-    cy.url().clearAllSessionStorage();
+    cy.clickOrganizationLink().then(() => {
+      cy.url().should("include", "/organizations/");
+      cy.inviteHMS();
+    });
   });
 });
 

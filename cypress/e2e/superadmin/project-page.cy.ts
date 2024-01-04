@@ -8,9 +8,13 @@ describe("project page", () => {
   });
 
   it("super admin can invite normal stakeholder", () => {
-    cy.clickOrganizationLink();
-    cy.get('[data-testid^="project-').first().click();
-    cy.url().should("include", "/projects");
-    cy.inviteNormalStakeholder();
+    cy.clickOrganizationLink().then(() => {
+      cy.get('[data-testid^="project-').first().click();
+      cy.url()
+        .should("include", "/projects")
+        .then(() => {
+          cy.inviteNormalStakeholder();
+        });
+    });
   });
 });
