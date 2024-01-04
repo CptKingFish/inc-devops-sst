@@ -36,7 +36,7 @@ const CreateProject = ({ orgId }: Props) => {
   });
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button data-testid="create-new-project">Create Project</Button>
       </DialogTrigger>
       <DialogContent>
