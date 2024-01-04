@@ -1,10 +1,10 @@
 describe("dashboard page", () => {
   beforeEach(() => {
-    cy.url().clearAllSessionStorage();
+    cy.login("lwin.moehtet77@gmail.com");
   });
 
-  it("can login", () => {
-    cy.login("lwin.moehtet77@gmail.com");
+  afterEach(() => {
+    cy.url().clearAllSessionStorage();
   });
 
   it("super admin can create new project", () => {
