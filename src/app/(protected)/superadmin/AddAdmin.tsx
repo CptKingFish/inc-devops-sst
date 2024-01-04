@@ -36,7 +36,7 @@ const AddAdmin = () => {
   });
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button data-testid="invite-admin-btn">Invite Admin</Button>
       </DialogTrigger>
       <DialogContent>

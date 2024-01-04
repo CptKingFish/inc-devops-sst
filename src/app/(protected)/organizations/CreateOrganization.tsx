@@ -32,8 +32,8 @@ const CreateOrganization = () => {
   });
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button>Create Organization</Button>
+      <DialogTrigger asChild>
+        <Button data-testid="create-new-organization-btn">Create Organization</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -45,7 +45,7 @@ const CreateOrganization = () => {
             createOrganization.mutate({ name });
           }}
         >
-          <Input
+          <Input data-testid="new-organization-name-input"
             placeholder="Name"
             value={name}
             onChange={(e) => {
@@ -54,7 +54,7 @@ const CreateOrganization = () => {
           />
           <div className="h-4" />
           <div className="flex items-center justify-between">
-            <Button isLoading={createOrganization.isLoading} type="submit">
+            <Button data-testid="submit-btn" isLoading={createOrganization.isLoading} type="submit">
               Create
             </Button>
           </div>

@@ -1,22 +1,22 @@
-describe("organization page", () => {
+describe("dashboard page", () => {
   beforeEach(() => {
     cy.login("lwin.moehtet77@gmail.com");
   });
-  it("can create new project", () => {
-    cy.checkOrganization();
-    cy.getDataTestId("create-new-project").click();
-    cy.getDataTestId("new-project-name-input").type("test");
-    cy.getDataTestId("submit-btn").click();
-    cy.wait(1000);
-    cy.get('[data-testid^="project-"]').should("exist");
+
+  it("super admin can create new project", () => {
+    cy.url().should("include", "/dashboard");
+    cy.get("h1").contains("All Organizations");
+    cy.clickOrganizationLink();
+    cy.createNewProject();
+    cy.url().clearAllSessionStorage();
   });
-  it("can invite HMS", () => {
-    cy.checkOrganization();
-    cy.getDataTestId("invite-hms-btn").click();
-    cy.getDataTestId("hms-email-input").type("test@gmail.com");
-    cy.getDataTestId("submit-btn").click();
-    cy.wait(1000);
-    cy.getDataTestId("hms-emails").should("exist");
+
+  it("super admin can invite HMS", () => {
+    cy.url().should("include", "/dashboard");
+    cy.get("h1").contains("All Organizations");
+    cy.clickOrganizationLink();
+    cy.inviteHMS();
+    cy.url().clearAllSessionStorage();
   });
 });
 

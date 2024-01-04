@@ -47,7 +47,10 @@ declare global {
        */
       getDataTestId(dataTestId: string): Chainable<JQuery<HTMLElement>>;
       login(emailInput: string): Chainable<void>;
-      checkOrganization(): Chainable<Element>;
+      clickOrganizationLink(): Chainable<Element>;
+      createNewProject(): Chainable<Element>;
+      inviteHMS(): Chainable<Element>;
+      inviteNormalStakeholder(): Chainable<Element>;
     }
   }
 }
@@ -80,17 +83,41 @@ Cypress.Commands.add("login", (emailInput: string) => {
   });
 });
 
-Cypress.Commands.add("checkOrganization", () => {
-  cy.visit("/dashboard");
-  cy.getDataTestId("all-organization-label").should("exist");
-
+Cypress.Commands.add("clickOrganizationLink", () => {
   cy.get("body").then(($body) => {
     if ($body.find('[data-testid="no-organization"]').length > 0) {
       cy.getDataTestId("no-organization").should("exist");
     } else {
-      cy.get('[data-testid^="organization-"]').each((item) => {
-        cy.wrap(item).should("exist").click();
-      });
+      cy.get('[data-testid^="organization-"]').last().click();
     }
   });
+});
+
+Cypress.Commands.add("createNewProject", () => {
+  cy.getDataTestId("create-new-project").click();
+  cy.getDataTestId("new-project-name-input").type("test");
+  cy.getDataTestId("submit-btn").click();
+  cy.wait(1000);
+  cy.get('[data-testid^="project-"]').should("exist");
+  cy.get("p").contains("test").should("exist");
+});
+
+Cypress.Commands.add("inviteHMS", () => {
+  cy.getDataTestId("invite-hms-btn").click();
+  cy.getDataTestId("hms-email-input").type("test@gmail.com");
+  cy.getDataTestId("submit-btn").click();
+  cy.wait(1000);
+  cy.getDataTestId("hms-emails").should("exist");
+  cy.get("li").contains("Invited upper management").should("exist");
+});
+
+Cypress.Commands.add("inviteNormalStakeholder", () => {
+  cy.getDataTestId("invite-stakeholder-btn").click();
+  cy.getDataTestId("invite-stakeholder-email-input").type(
+    "teststakeholder@gmail.com",
+  );
+  cy.getDataTestId("submit-btn").click();
+  cy.wait(1000);
+  cy.get('[data-testid^="stakeholder-email').should("exist");
+  cy.get("li").contains("Invited Stakeholder").should("exist");
 });

@@ -45,7 +45,7 @@ const ProjectIdPage = async ({ params: { projectId } }: Props) => {
   const stakeholders = await api.project.getStakeholders.query({ projectId });
   return (
     <>
-      <h1 className="text-xl font-medium">{project.name}</h1>
+      <h1 data-testid="project-name" className="text-xl font-medium">{project.name}</h1>
       <div className="h-2" />
       <InviteToProjectProtector project={project} user={user} />
       <div className="h-4" />

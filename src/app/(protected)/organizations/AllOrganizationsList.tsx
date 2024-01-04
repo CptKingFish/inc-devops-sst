@@ -11,7 +11,7 @@ const AllOrganizationsList = ({ organizations }: Props) => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
       {organizations.map((org) => (
-        <Link
+        <Link data-testid={`organization-${org.id}`}
           href={`/organizations/${org.id}`}
           key={org.id}
           className="cursor-pointer overflow-hidden rounded-md border bg-white shadow transition hover:scale-105 hover:shadow-xl"
